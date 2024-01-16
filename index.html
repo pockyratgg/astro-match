@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <link href="styles.css" rel="stylesheet">
+    <script src="script.js" async></script> <!-- async means load the javascript file at the same time as the index.html file. we're gonna add code that says if the page hasn't loaded yet, wait for the page to load before the javascript is ran-->
+    <title>Astro Match</title>
+    <link rel="icon" type="image/png" href="Assets/Images/Cancer-Art.png"/> <!--icon for the browser tab for the game-->
+</div>
+</head>
+<body>
+    <header class="top-header">
+        <h1 class="page-title">&#8205</h1> <!-- added in an invisible character since deleting this gets ride of the image-->
+    </header>
+    <div class="overlay-text visible"> <!-- adding in part of a start screen overlay here!-->
+        Click to Start!
+    </div>
+    <div id= "game-over-text" class="overlay-text"> <!-- adding in part of a game over overlay here! game-over-text is added in so it can be selected by javascript later-->
+        GAME OVER
+        <span class="overlay-text-small">Click to Restart</span>
+    </div>
+    <div id= "victory-text" class="overlay-text"> <!-- adding in part of a victory screen overlay here! add or remove visible after overlay-text to toggle-->
+        VICTORY
+        <span class="overlay-text-small">Click to Restart</span>
+    </div>
+    <div class="game-container">
+        <div class="game-info-container">
+            <div class ="game-info">
+                Time: <span id="time-remaining">120</span>
+        </div>
+        <div class="game-info">
+            Flips: <span id="flips">0</span>
+            </div>
+        </div>
+        <!--adding all our cards to our game container, 16 of them-->
+        <div class="card"> <!-- changing from card to card visible for when we want the front to show and the back to show when visible is erased!-->
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Aquarius-Art.png"> 
+                <!--astrology text on each card-->
+                <img class="card-text" src="Assets/Images/Aquarius.png">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Aquarius-Art.png"> 
+                <img class="card-text" src="Assets/Images/Aquarius.png">
+            </div>
+        </div>        
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Aries-Art.png"> 
+                <img class="card-text" src="Assets/Images/Aries.png">
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Aries-Art.png"> 
+                <img class="card-text" src="Assets/Images/Aries.png">
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Cancer-Art.png"> 
+                <img class="card-text" src="Assets/Images/Cancer.png">
+            </div>
+        </div>        
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Cancer-Art.png"> 
+                <img class="card-text" src="Assets/Images/Cancer.png">
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Capricon-Art.png"> 
+                <img class="card-text" src="Assets/Images/Capricorn.png">
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Capricon-Art.png"> 
+                <img class="card-text" src="Assets/Images/Capricorn.png">
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Gemini-Art.png"> 
+                <img class="card-text" src="Assets/Images/Gemini.png"> 
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Gemini-Art.png"> 
+                <img class="card-text" src="Assets/Images/Gemini.png"> 
+            </div>
+        </div>       
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Leo-Art.png"> 
+                <img class="card-text" src="Assets/Images/Leo.png"> 
+            </div>
+        </div>     
+        <div class="card"> 
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Leo-Art.png"> 
+                <img class="card-text" src="Assets/Images/Leo.png"> 
+            </div>
+        </div>      
+        <div class="card"> 
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Libra-Art.png"> 
+                <img class="card-text" src="Assets/Images/Libra.png">
+            </div>
+        </div>      
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Libra-Art.png"> 
+                <img class="card-text" src="Assets/Images/Libra.png">
+            </div>
+        </div>    
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Pisces-Art.png"> 
+                <img class="card-text" src="Assets/Images/Pisces.png"> 
+            </div>
+        </div>
+        <div class="card"> 
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Pisces-Art.png"> 
+                <img class="card-text" src="Assets/Images/Pisces.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Sagittarius-Art.png"> 
+                <img class="card-text" src="Assets/Images/Sagittarius.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Sagittarius-Art.png"> 
+                <img class="card-text" src="Assets/Images/Sagittarius.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Scorpio-Art.png"> 
+                <img class="card-text" src="Assets/Images/Scorpio.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Scorpio-Art.png"> 
+                <img class="card-text" src="Assets/Images/Scorpio.png">
+            </div>
+        </div>
+        <div class="card"> 
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Taurus-Art.png"> 
+                <img class="card-text" src="Assets/Images/Taurus.png"> 
+            </div>
+        </div>
+        <div class="card"> 
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Taurus-Art.png"> 
+                <img class="card-text" src="Assets/Images/Taurus.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Virgo-Art.png"> 
+                <img class="card-text" src="Assets/Images/Virgo.png"> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-back card-face"> <!-- back of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Light.png">
+                <img class="astrologo" src="Assets/Images/CardbackArt.png">
+            </div>
+            <div class="card-front card-face"> <!-- front of card styling-->
+                <img class="filigree filigree-top-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-top-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-left"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="filigree filigree-bottom-right"
+                src = "Assets/Images/Corner-Dark.png">
+                <img class="card-value" src="Assets/Images/Virgo-Art.png"> 
+                <img class="card-text" src="Assets/Images/Virgo.png"> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

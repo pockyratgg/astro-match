@@ -1,0 +1,267 @@
+/* Adding in font for timer and flips to use later */
+@font-face {
+    font-family: "wg_griffin_font";
+    src: url("Assets/Fonts/wg_griffin_font.ttf") format("ttf"), url("Assets/Fonts/wg_griffin_font.ttf")
+}
+
+@font-face {
+    font-family: "Lunacy";
+    src: url("Assets/Fonts/Lunacy.woff") format("ttf"), url("Assets/Fonts/Lunacy.woff2")
+}
+
+/* Changes the sizing to use border box so it makes adjusting sizes much easier */
+* {
+    box-sizing: border-box;
+}
+
+/* makes the background not repeat and stretch instead */
+html {
+    min-height: 100vh;
+    cursor: url("Assets/Cursors/moon.cur"), auto; /*putting in a moon cursor!*/
+}
+
+/*header image */
+.top-header { 
+    width: 100%; 
+    background-image: url("Assets/Images/Title.png"); 
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    font-size: 5em;
+} 
+ 
+/* adding in background images, first image in list is seen first */
+html {
+    margin: 0;
+    background-image: url("Assets/Images/StarOverlay1.png"),url("Assets/Images/StarOverlay2.png"), url("Assets/Images/BG.png"); /*multiple background images stack here*/
+    background-size: 1000px, 800px, auto;
+}
+
+
+/* this wraps our different game elements. text is currently on top and the grid is bottom so we're going to adjust the position here */
+.game-info-container {
+    grid-column: 1 / -1;
+    display: flex; /* this gets our text to line up side by side */
+    justify-content: space-between;
+}
+
+/* changing the font for the timer and flips to griffin */
+.game-info {
+    font-family: wg_griffin_font, serif;
+    color: #f2f9fc;
+    font-size: 2em;
+}
+
+/* select game container and take the long black columns and split them up and separate. uses css grid*/
+.game-container {
+    display: grid;
+    grid-template-columns: repeat(8, auto); /* repeat 4 times and automatically resize columns to whatever size the elements are inside of them*/
+    grid-gap: 5px;
+    margin: -100px; /* this is our space inbetween the title and Time 100, Flips 100 */
+    justify-content: center; /* this gets our cards to be spaced evenly all throughout the rows and columns*/
+    perspective: 500px; /* adding 3d animation which adds perspective to one of our elements for the card flip portion so its not just visible or not visible. this says our user is 500 pixels away from the game container for when we rotate things in 3 dimensions*/
+}
+
+
+/*temporary style for card adding in here, just black. this also adjusts height and width of cards here */
+.card {
+    position: relative; /* this is used so everything is inside the card */
+    /* this was a temporary grid to line up cards. background-color: black; */
+    height: 175px; /*OG card height is 175px*/
+    width: 125px; /*OG card height is 125px*/
+}
+
+/* cursor change when hovering, currently just set to the same one as normal instead of hover effect */
+.card:hover {
+    cursor: url("Assets/Cursors/moon.cur"), auto;
+}
+
+/* we use absolute positioning so the front and back cards are layered on top of each other */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex; /*this is so we can position our astrologo much easier */
+    justify-content: center; 
+    align-items: center;
+    overflow: hidden; /* this line hides anything that is over the edges of the card! (like the astrologo edges) */
+    backface-visibility: hidden; /* anything facing the back to us should act if its not there*/
+    border-radius: 20px; /* adding a border to the cards, set to 20 to make rounder */
+    border-width: 1px;
+    border-style: solid;
+    transition: transform 500ms ease-in-out; /*slows down the animation of the card flip so it looks more realistic and is smoother */
+}
+
+/* when our card is visible, we want to make our card back rotate and it should be negative so our card back is no longer being shown */
+.card.visible .card-back { /* changing from .card.visible to .card:hover so the 3d applies visible spec. animation smoothing and slow down is above. changed back to .visible for JS portion */
+    transform: rotateY(-180deg);
+}
+
+/* uses rotateY so it looks like a normal card flip on the Y axis */
+.card.visible .card-front {
+    transform: rotateY(0);
+}
+
+/* adding a dance animation when the player makes a match. 1 second long, playing infinitely, and doesn't start until 500ms since that's how long it takes for our card to flip over and we don't want to start it too early */
+.card.matched .card-value {
+    animation: dance 1s linear infinite 500ms;
+}
+
+/* for our start screen overlay. top, left, right, bottom all set to 0 so our text will spread out to be the entire height, width, and size of the screen at all times*/
+.overlay-text {
+    display: none; /* this is used so it only shows when our visible class is on */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; /*using z index here so it shows ontop of our cards */
+    color: #d4a6ee;
+    font-family: wg_griffin_font, serif;
+}
+
+/* changing the style of the click to restart text here since it is too large if left as is and matches game over size */
+.overlay-text-small {
+    font-size: .3em; /*this makes the size 30% of the larger size of game over */
+
+}
+
+/* we want to use an animation to make the start screen text to grow in size and give us a background to hover over all other stuff on the page */
+/* we use forwards here because we want all the properties from the end of our animations, to apply to our overlay text */
+.overlay-text.visible {
+    display: flex;
+    flex-direction: column; /*this makes sure game over and click to restart stack ontop of each other instead of side by side for game over and click to restart*/
+    animation:overlay-grow 500ms forwards;
+}
+/*part of the grow animation for the start screen text */
+@keyframes overlay-grow {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+        font-size: 0;
+    }
+    to {
+        background-color: rgba(0, 0, 0, .8); /* the last value in the line darkens the background */
+        font-size: 7em;
+    }
+}
+
+/*adjusts rotation on matches */
+@keyframes dance {
+    0%, 100% {
+        transform: rotate(0);
+    }
+    25% {
+        transform: rotate(-30deg);
+    }
+    75% {
+        transform: rotate(30deg);
+    }
+}
+
+/* adds in a purple border to the card that matches the card background so it disappears */
+.card-back {
+    background-image: url("Assets/Images/CardBack-Blank.png");
+    border-color: #523660;
+}
+
+.card-front {
+    background-image: url("Assets/Images/CardFront-Blank.png");
+    border-color: #523660;
+    transform: rotateY(180deg); /* rotating card front so it doesn't take animations being applied to back of the card */
+}
+
+/* selecting the card value normally without hover, scale is slightly smaller */
+.card-value {
+    transition: transform 100ms ease-in-out; /* adding the astrologo animation to here to smoothly grow when hovered*/
+    transform: scale(.9);
+}
+
+/*adding the growing animation to the front of the card for the design in the corners */
+.card-front:hover .card-value {
+    transform: scale(1);
+}
+
+/*text for each astrology sign on card*/
+.card-text {
+    position: absolute;
+    top: 22px;
+    bottom: 0px;
+    left: 38px;
+    width: 47px;
+    height: -100px; 
+}
+  
+
+.filigree {
+    position: absolute;
+    width: 37px;
+    height: 37px;
+    transition: width 100ms ease-in-out, height 100ms /*adding an animation to the filigree*/
+    ease-in-out; 
+}
+
+/* causes filigree to grow when hovering over them. changing from .card back to .card-face so its applied to both sides of the card*/
+.card-face:hover .filigree {
+    width: 42px; 
+    height: 42px;
+}
+
+/* this is taking the top left filigree, rotating it, and then positioning it in the corner. this is repeated with each filigree! */
+.filigree-top-left {
+    transform: rotate(270deg);
+    top: 0;
+    left: 0;
+}
+
+.filigree-top-right {
+    top: 0;
+    right: 0;
+}
+
+.filigree-bottom-left {
+    transform: rotate(180deg);
+    bottom: 0;
+    left: 0;
+}
+
+.filigree-bottom-right {
+    transform: rotate(90deg);
+    bottom: 0;
+    right: 0;
+}
+
+/* selecting our astrology logo and aligning it correctly*/
+.astrologo {
+    align-self: center; /* aligning with top of screen instead of center.  */
+    transform: translateY(10px);
+    transition: transform 100ms ease-in-out; /* adding an animation to the logo to move up and down when hovered*/
+}
+.card-back:hover .astrologo {
+    transform: translateY(0)
+}
+
+/* size adjustment of site on smaller devices */
+@media (max-width: 1100px) { /*when the max width of our screen is 1100px or less, we want to apply some special styles*/
+    .game-container {
+        grid-template-columns: repeat(6, auto); /*changing our columns from 8 to 6 auto sized columns */
+    }
+}
+@media (max-width: 800px) { 
+    .game-container {
+        grid-template-columns: repeat(4, auto); /*changing our columns from 6 to 4 auto sized columns */
+    }
+}
+@media (max-width: 600px) {
+    .game-container {
+        grid-template-columns: repeat(2, auto); /*changing our columns from 4 to 2 auto sized columns */
+   }
+}
+ 
+
+    /* this is for getting time and flip to stack on-top of each other when the browser is resized */
+    .game-info-container {
+        flex-direction: column;
+        align-items: center;
+    }
